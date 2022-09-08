@@ -10,8 +10,7 @@ import com.library.books.model.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Integer> {
-
-	@Query(value = "SELECT * FROM book b WHERE b.authorName=?1", nativeQuery = true)
+	
 	List<Book> findAllByAuthorName(String name);
 	
 }
