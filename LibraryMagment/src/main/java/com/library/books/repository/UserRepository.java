@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.library.books.model.User;
 
+@Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 
 	abstract public User findByUsernameAndPassword(String username, String password);
