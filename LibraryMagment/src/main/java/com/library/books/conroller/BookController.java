@@ -39,18 +39,26 @@ public class BookController {
 	}
 
 	@PostMapping("/add-book")
-	public Book addNewBook(@RequestBody Book book) {
-		return bookService.addBook(book);
+	public ResponseEntity<Book> addNewBook(@RequestBody Book book) {
+		Book b = bookService.addBook(book);
+		return new ResponseEntity<Book>(b,HttpStatus.CREATED);
 	}
 	
 	@PutMapping("/update-book/{id}")
-	public Book updateBook(@PathVariable("id") int id ,@RequestBody Book book) {
-		return bookService.updateBook(book);
+	public ResponseEntity<Book> updateBook(@PathVariable("id") int id ,@RequestBody Book book) {
+		Book b = bookService.updateBook(book);
+		return new ResponseEntity<Book>(b,HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete-book/{id}")
 	public void deleteBook(@PathVariable("id") Integer id) {
 		bookService.deleteBook(id);
+	}
+	
+	@GetMapping("/author/{name}")
+	public ResponseEntity<List<Book>> getAllBooksByAuthor(@PathVariable("name")String aName){
+		List<Book>books = bookService.findAllByAuthorName(aName);
+		return new ResponseEntity<List<Book>>(books,HttpStatus.OK);
 	}
 	
 }
